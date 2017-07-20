@@ -1,13 +1,14 @@
 /**
  * Tasks "Array Processing Tool".
+ * Largest Sum Contiguous Subarray.
+ * Search for the minimum, maximum, median values in the array.
+ *  Search for an increasing sequence of maximum length in the original array.
  */
-var ArrayProcessingTool;
-ArrayProcessingTool = (function () {
+
+var arrayProcessingTool;
+arrayProcessingTool = (function () {
 
     return {
-        /**
-         * Largest Sum Contiguous Subarray.
-         */
         getMaxSubSum: function(arr) {
             var maxSum = 0,
                 prevSum = 0;
@@ -23,23 +24,14 @@ ArrayProcessingTool = (function () {
             return maxSum;
         },
 
-        /**
-         * Search for the minimum values in the array.
-         */
         searchMin: function(arr) {
             return  Math.min.apply(null, arr);
         },
 
-        /**
-         * Search for the maximum values in the array.
-         */
         searchMax: function(arr) {
             return Math.max.apply(null, arr);
         },
 
-        /**
-         * Search for the median values in the array.
-         */
         searchMedian: function(arr) {
             arr.sort(function (a, b) {
                 return a -b;
@@ -54,9 +46,6 @@ ArrayProcessingTool = (function () {
             }
         },
 
-        /**
-         * Search for an increasing sequence of maximum length in the original array.
-         */
         findLongestIncreasingSequence: function(arr) {
             var sequence = [],
                 fork = null;
