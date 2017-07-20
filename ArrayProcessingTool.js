@@ -4,6 +4,7 @@
  * Search for the minimum, maximum, median values in the array.
  *  Search for an increasing sequence of maximum length in the original array.
  */
+
 var arrayProcessingTool;
 arrayProcessingTool = (function () {
 
