@@ -1,4 +1,5 @@
-/**The developer of the object is a sorter that allows sorting integer arrays
+/**
+ * The developer of the object is a sorter that allows sorting integer arrays
  * in at least 4 ways.
  */
 var arraySorter;
