@@ -4,8 +4,7 @@
  * formatting ("word wrap", "carry by character", "carry by sentence",
  * "no hyphenation" - optional).
  */
-var textFormatter;
-textFormatter = function() {
+var textFormatter = function () {
 
     function testSpace(symbol) {
         var space = new RegExp(/^\s$/);
@@ -18,9 +17,8 @@ textFormatter = function() {
 
         return dot.test(symbol.charAt(0));
     }
-    
-    function sentenceWrap(str, max_string_size) {
 
+    function sentenceWrap(str, max_string_size) {
         var newLine = '\n',
             resultLine = '',
             done = false;
@@ -40,7 +38,7 @@ textFormatter = function() {
             if (!found) {
                 for (var k = 0; k < str.length; k++) {
                     if (testDot(str.charAt(k))) {
-                        resultLine += [str.slice(0 , k), newLine].join('');
+                        resultLine += [str.slice(0, k), newLine].join('');
                         str = str.slice(k + 1);
                         break;
                     }
@@ -120,11 +118,11 @@ textFormatter = function() {
     }
 
     return {
-        formatter: function(str, bozo, max_string_size, max_number_of_strings) {
+        formatter: function (str, bozo, max_string_size, max_number_of_strings) {
             max_string_size = typeof max_string_size !== 'undefined' ? max_string_size : 10;
             max_number_of_strings = typeof max_number_of_strings !== 'undefined' ? max_number_of_strings : 5;
 
-            if ( str.match(/\./g).length > max_number_of_strings) {
+            if (str.match(/\./g).length > max_number_of_strings) {
                 throw "The number of lines exceeded";
             }
 
@@ -149,4 +147,4 @@ textFormatter = function() {
     }
 }();
 
-console.log(textFormatter.formatter('Lorem. Ipsum. is simply dummy text of the printing and typesetting industry.', 3));
+console.log(textFormatter.formatter('Lorem.ip. sum. is simply dummy text of the printing and typesetting industry.', 2));

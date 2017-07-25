@@ -2,17 +2,16 @@
  * The developer of the object is a sorter that allows sorting integer arrays
  * in at least 4 ways.
  */
-var arraySorter;
-arraySorter = function () {
+var arraySorter = function () {
 
     return {
-        bubbleSort: function(array) {
+        bubbleSort: function (array) {
             for (var i = 0; i < array.length; i++) {
                 for (var j = 0; j < array.length - i - 1; j++) {
-                    if (array[j] > array[j+1]) {
+                    if (array[j] > array[j + 1]) {
                         var temp = array[j];
-                        array[j] = array[j+1];
-                        array[j+1] = temp;
+                        array[j] = array[j + 1];
+                        array[j + 1] = temp;
                     }
                 }
             }
@@ -20,15 +19,13 @@ arraySorter = function () {
             return array;
         },
 
-        merge: function(left, right) {
+        merge: function (left, right) {
             var array_result = [],
                 leftIndex = 0,
                 rightIndex = 0;
 
-            while (leftIndex < left.length && rightIndex < right.length)
-            {
-                if (left[leftIndex] > right[rightIndex])
-                {
+            while (leftIndex < left.length && rightIndex < right.length) {
+                if (left[leftIndex] > right[rightIndex]) {
                     array_result.push(right[rightIndex]);
                     rightIndex++;
                 } else {
@@ -37,14 +34,12 @@ arraySorter = function () {
                 }
             }
 
-            while (leftIndex < left.length)
-            {
+            while (leftIndex < left.length) {
                 array_result.push(left[leftIndex]);
                 leftIndex++;
             }
 
-            while (rightIndex < right.length)
-            {
+            while (rightIndex < right.length) {
                 array_result.push(right[rightIndex]);
                 rightIndex++;
             }
@@ -52,8 +47,8 @@ arraySorter = function () {
             return array_result;
         },
 
-        mergeSort: function(array) {
-            if (array.length === 1 ) {
+        mergeSort: function (array) {
+            if (array.length === 1) {
                 return array;
             }
 
@@ -64,21 +59,21 @@ arraySorter = function () {
             return arraySorter.merge(arraySorter.mergeSort(left), arraySorter.mergeSort(right));
         },
 
-        insertionSort: function(array) {
+        insertionSort: function (array) {
             for (var i = 0; i < array.length; i++) {
                 var temp = array[i];
 
                 for (var j = i - 1; j >= 0 && array[j] > temp; j--) {
-                    array[j+1] = array[j];
+                    array[j + 1] = array[j];
                 }
 
-                array[j+1] = temp;
+                array[j + 1] = temp;
             }
 
             return array;
         },
 
-        bucketSort: function(array, bucketSize) {
+        bucketSort: function (array, bucketSize) {
             if (array.length === 0) {
                 return array;
             }
@@ -116,17 +111,17 @@ arraySorter = function () {
             return array;
         },
 
-        swap: function(array, leftIndex, rightIndex) {
+        swap: function (array, leftIndex, rightIndex) {
             var temp = array[leftIndex];
             array[leftIndex] = array[rightIndex];
             array[rightIndex] = temp;
         },
 
-        partition: function(array, left, right) {
-            var index   = Math.floor((right + left) / 2),
-                pivot   = array[index],
-                i       = left,
-                j       = right;
+        partition: function (array, left, right) {
+            var index = Math.floor((right + left) / 2),
+                pivot = array[index],
+                i = left,
+                j = right;
 
             while (i < j) {
 
@@ -153,7 +148,7 @@ arraySorter = function () {
             return i;
         },
 
-        quickSort: function(array, left, right) {
+        quickSort: function (array, left, right) {
             var index;
 
             if (array.length > 1) {
@@ -181,4 +176,4 @@ arraySorter = function () {
 console.log(arraySorter.bubbleSort([1, 5, 3, 2]));
 console.log(arraySorter.mergeSort([1, 5, 3, 2, 7, 6]));
 console.log(arraySorter.bucketSort([1, 5, 3, 2]));
-console.log(arraySorter.quickSort([1, 5, 3, 2, 7, 6], 0, 5));
+console.log(arraySorter.quickSort([1, 5, 3, 2, 7, 6]));
