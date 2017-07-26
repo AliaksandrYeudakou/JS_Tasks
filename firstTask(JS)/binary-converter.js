@@ -3,14 +3,13 @@
  * the decimal and back. Numbers are represented as vectors (number arrays,
  * where the index is a digit).
  */
-var binaryConverter;
-binaryConverter = function() {
+var binaryConverter = function () {
 
     function numberToBinary(number) {
         var res = [];
 
         while (number >= 1) {
-            res.unshift(Math.floor( number % 2) );
+            res.unshift(Math.floor(number % 2));
             number = number / 2;
         }
 
@@ -40,13 +39,13 @@ binaryConverter = function() {
 
     return {
 
-        convertToBinary: function(array) {
+        convertToBinary: function (array) {
             var correctIntegerNumber = getNumberFromArray(array);
 
             return getBinaryNumber(numberToBinary(correctIntegerNumber));
         },
 
-        convertToInteger: function(array) {
+        convertToInteger: function (array) {
             var integerNumber = 0;
 
             for (var i = 0; i < array.length; i++) {
@@ -58,5 +57,5 @@ binaryConverter = function() {
     }
 }();
 
-console.log(binaryConverter.convertToBinary([3]));
-console.log(binaryConverter.convertToInteger([1, 0, 1]));
+console.log(binaryConverter.convertToBinary([1, 6]));
+console.log(binaryConverter.convertToInteger([0, 1, 1]));

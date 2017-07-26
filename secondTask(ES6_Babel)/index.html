@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test</title>
+</head>
+<body>
+    <header class="test">
+
+    </header>
+
+    <div class="test-page">
+        <h3 class="test-page__task-title">Array Processing Tool</h3>
+        <p class="test-page__task-caption">
+            a. Sub Sum:
+            На входе массив чисел, например: arr = [1, -2, 3, 4, -9, 6].
+            Задача — найти непрерывный подмассив arr, сумма элементов которого
+            максимальна. Функция должна возвращать только эту сумму.
+            <br>
+            b. Search:
+            Написать функционал поиска минимального, максимального, медианного
+            значения в массиве.
+            <br>
+            c. Selection Task:
+            Написать функционал поиска возрастающей последовательности
+            максимальной длины в исходном массиве.</p>
+        <h4 class="test-page__example">How it use:</h4>
+        <p>var array = [1, -2, 3, 4, -9, 6];
+            <br>
+            var variable = new arrayProcessingTool(array);
+            <br>
+            variable.getMaxElement() / variable.getMinElement() / variable.getMaxSubarraySum() / variable.getMedianValue() / variable.getLongestIncreasingSequence()</p>
+
+        <h3 class="test-page__task-title">Date Display Formatter</h3>
+        <p class="test-page__task-caption">
+            Разработать объект для форматирования дат (объект содержащий набор
+            функций). Объект должен позволять обрабатывать входные данные в виде
+            строки или в виде числа (ticks, ms). Объект должен поддерживать
+            возможность передачи внутрь регулярного выражения для разбора
+            исходной строки и построения выходной строки.</p>
+        <h4 class="test-page__example">How it use:</h4>
+        <p>
+            var str1 = "31102011";
+            <br>
+            var str2 = "31012011";
+            <br>
+            var str3_1 = "20130431";
+            var str3_2 = "YYYYMMDD";
+            <br>
+            var str4_1 = "20130431"; var str4_2 = "YYYYMMDD"; var str4_3 = "MM-DD-YYYY";
+            <br>
+            var variable = new dateDisplayFormatter;
+            <br>
+            variable.getDateInDigits(str1) / variable.getDateWithNameOfMonth(str2) / variable.getDateWithInputReg(str3_1, str3_2) / variable.getDateWithInputOutputReg(str4_1, str4_2, str4_3) </p>
+
+        <h3 class="test-page__task-title">String calculator</h3>
+        <p class="test-page__task-caption">
+            Разработать объект содержащий набор методов для выполнения функций
+            калькулятора над числами передаваемыми в строковом представлении.
+            Методы должны позволять работать как в целочисленном, так и
+            вещественном формате.
+        </p>
+        <h4 class="test-page__example">How it use:</h4>
+        <p> var param1 = 4; var param2 = 5;
+            <br>
+            var variable = new stringCalculator(param1, param2);
+            <br>
+            variable.addition() / variable.subtraction() / variable.multiplication() / variable.division()</p>
+
+        <h3 class="test-page__task-title">Array Sorter</h3>
+        <p class="test-page__task-caption">
+            Разработать объект сортировщик, позволяющий производить сортировки
+            целочисленных массивов не менее чем 4 способами.
+        </p>
+        <h4 class="test-page__example">How it use:</h4>
+        <p> var array = [1, -2, 3, 4, -9, 6];
+            <br>
+            var variable = new arraySorter(array);
+            <br>
+            variable.bubbleSort() / arraySorter.mergeSort(array) / arraySorter.bucketSort(array) / arraySorter.quickSort(array)
+
+        <h3 class="test-page__task-title">Binary Converter</h3>
+        <p class="test-page__task-caption">
+            Создать объект позволяющий производить конвертацию чисел из двоичной
+            системы исчисления в десятеричную и обратно. Числа представлены в
+            виде векторов (массивов чисел, где индекс является разрядом).
+            Дополнительно: создать функции для перевода из любой системы в любую.
+        </p>
+        <h4 class="test-page__example">How it use:</h4>
+        <p> var array_1 = [1, 2, 5]; //it's like 125
+            var array_2 = [1, 0 ,0];
+            <br>
+            var variable_1 = new binaryConverter(array_1);
+            var variable_2 = new binaryConverter(array_2);
+            <br>
+            variable.convertToBinary(variable_1) / variable.convertToInteger(variable_2)
+
+        <h3 class="test-page__task-title">Caching calculator</h3>
+        <p class="test-page__task-caption">
+            Написать функционал позволяющий производить операции над двумя
+            числами и кэширование результата выполнения операции так, чтобы при
+            повторном вызове функционала с теми же параметрами взялось
+            закэшированное значение и не производилось перевычисление результата.
+        </p>
+        <h4 class="test-page__example">How it use:</h4>
+        <p> var memo = cachingCalculator.memoizes(cachingCalculator.calculate);
+            <br>
+            memo(1, 2, '+') /  memo(1, 2, '+')
+    </div>
+    <script src="./dist/bundle.js"></script>
+</body>
+</html>
