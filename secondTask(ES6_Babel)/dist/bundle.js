@@ -90,6 +90,10 @@ var _cachingCalculator_es = __webpack_require__(5);
 
 var _cachingCalculator_es2 = _interopRequireDefault(_cachingCalculator_es);
 
+var _arraySortet_es = __webpack_require__(6);
+
+var _arraySortet_es2 = _interopRequireDefault(_arraySortet_es);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 (function () {
@@ -98,6 +102,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
     window.stringCalculator = _stringCalculator_es2.default;
     window.dateDisplayFormatter = _dateDisplayFormatter_es2.default;
     window.cachingCalculator = _cachingCalculator_es2.default;
+    window.arraySorter = _arraySortet_es2.default;
 })();
 
 /***/ }),
@@ -480,16 +485,19 @@ var CachingCalculator = function () {
         _classCallCheck(this, CachingCalculator);
     }
 
-    _createClass(CachingCalculator, [{
+    _createClass(CachingCalculator, null, [{
         key: 'memoizes',
         value: function memoizes(func) {
-            var _arguments = arguments,
-                _this = this;
+            var _this = this;
 
             var cached = {};
 
             return function () {
-                var args = Array.prototype.slice.call(_arguments);
+                for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+                    args[_key] = arguments[_key];
+                }
+
+                // let args = Array.prototype.slice.call(arguments);
 
                 if (cached[args]) {
                     console.log('returning cached');
@@ -528,6 +536,215 @@ var CachingCalculator = function () {
 }();
 
 exports.default = CachingCalculator;
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/**
+ * The developer of the object is a sorter that allows sorting integer arrays
+ * in at least 4 ways.
+ */
+var ArraySorter = function () {
+    function ArraySorter(array) {
+        _classCallCheck(this, ArraySorter);
+
+        this.array = array;
+    }
+
+    _createClass(ArraySorter, [{
+        key: "bubbleSort",
+        value: function bubbleSort() {
+            for (var i = 0; i < this.array.length; i++) {
+                for (var j = 0; j < this.array.length - i - 1; j++) {
+                    if (this.array[j] > this.array[j + 1]) {
+                        var temp = this.array[j];
+                        this.array[j] = this.array[j + 1];
+                        this.array[j + 1] = temp;
+                    }
+                }
+            }
+
+            return this.array;
+        }
+    }], [{
+        key: "merge",
+        value: function merge(left, right) {
+            var array_result = [];
+            var leftIndex = 0;
+            var rightIndex = 0;
+
+            while (leftIndex < left.length && rightIndex < right.length) {
+                if (left[leftIndex] > right[rightIndex]) {
+                    array_result.push(right[rightIndex]);
+                    rightIndex++;
+                } else {
+                    array_result.push(left[leftIndex]);
+                    leftIndex++;
+                }
+            }
+
+            while (leftIndex < left.length) {
+                array_result.push(left[leftIndex]);
+                leftIndex++;
+            }
+
+            while (rightIndex < right.length) {
+                array_result.push(right[rightIndex]);
+                rightIndex++;
+            }
+
+            return array_result;
+        }
+    }, {
+        key: "mergeSort",
+        value: function mergeSort(array) {
+            if (array.length === 1) {
+                return array;
+            }
+
+            var mid = parseInt(array.length / 2),
+                left = array.slice(0, mid),
+                right = array.slice(mid);
+
+            return ArraySorter.merge(ArraySorter.mergeSort(left), ArraySorter.mergeSort(right));
+        }
+    }, {
+        key: "insertionSort",
+        value: function insertionSort(array) {
+            for (var i = 0; i < array.length; i++) {
+                var temp = array[i];
+                var j = void 0;
+
+                for (j = i - 1; j >= 0 && array[j] > temp; j--) {
+                    array[j + 1] = array[j];
+                }
+
+                array[j + 1] = temp;
+            }
+
+            return array;
+        }
+    }, {
+        key: "bucketSort",
+        value: function bucketSort(array) {
+            var bucketSize = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 10;
+
+            if (array.length === 0) {
+                return array;
+            }
+
+            var minValue = array[0];
+            var maxValue = array[0];
+
+            for (var i = 1; i < array.length; i++) {
+                if (array[i] < minValue) {
+                    minValue = array[i];
+                } else if (array[i] > maxValue) {
+                    maxValue = array[i];
+                }
+            }
+
+            var bucketCount = Math.floor((maxValue - minValue) / bucketSize) + 1,
+                buckets = new Array(bucketCount);
+            for (var _i = 0; _i < buckets.length; _i++) {
+                buckets[_i] = [];
+            }
+
+            for (var _i2 = 0; _i2 < array.length; _i2++) {
+                buckets[Math.floor((array[_i2] - minValue) / bucketSize)].push(array[_i2]);
+            }
+
+            array.length = 0;
+            for (var _i3 = 0; _i3 < buckets.length; _i3++) {
+                arraySorter.insertionSort(buckets[_i3]);
+                for (var j = 0; j < buckets[_i3].length; j++) {
+                    array.push(buckets[_i3][j]);
+                }
+            }
+
+            return array;
+        }
+    }, {
+        key: "swap",
+        value: function swap(array, leftIndex, rightIndex) {
+            var temp = array[leftIndex];
+            array[leftIndex] = array[rightIndex];
+            array[rightIndex] = temp;
+        }
+    }, {
+        key: "partition",
+        value: function partition(array, left, right) {
+            var index = Math.floor((right + left) / 2);
+            var pivot = array[index];
+            var i = left;
+            var j = right;
+
+            while (i < j) {
+
+                while (array[i] < pivot) {
+                    i++;
+                }
+
+                while (array[j] > pivot) {
+                    j--;
+                }
+
+                if (i < j) {
+                    ArraySorter.swap(array, i, j);
+                    if (i === index) {
+                        index = j;
+                    } else if (j === index) {
+                        index = i;
+                    }
+
+                    i++;
+                    j--;
+                }
+            }
+
+            return i;
+        }
+    }, {
+        key: "quickSort",
+        value: function quickSort(array, left, right) {
+            var index = void 0;
+
+            if (array.length > 1) {
+
+                left = typeof left !== "number" ? 0 : left;
+                right = typeof right !== "number" ? array.length - 1 : right;
+
+                index = ArraySorter.partition(array, left, right);
+
+                if (left < index - 1) {
+                    ArraySorter.quickSort(array, left, index - 1);
+                }
+
+                if (index + 1 < right) {
+                    ArraySorter.quickSort(array, index + 1, right);
+                }
+            }
+
+            return array;
+        }
+    }]);
+
+    return ArraySorter;
+}();
+
+exports.default = ArraySorter;
 
 /***/ })
 /******/ ]);

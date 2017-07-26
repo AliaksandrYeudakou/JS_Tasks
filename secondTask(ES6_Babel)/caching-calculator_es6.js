@@ -5,11 +5,11 @@
  */
 export default class CachingCalculator {
 
-    memoizes(func) {
+    static memoizes (func) {
         let cached = {};
 
-        return () => {
-            let args = Array.prototype.slice.call(arguments);
+        return (...args) => {
+            // let args = Array.prototype.slice.call(arguments);
 
             if (cached[args]) {
                 console.log('returning cached');
@@ -20,9 +20,9 @@ export default class CachingCalculator {
                 return cached[args];
             }
         };
-    }
+    };
 
-    calculate(a, b, operator) {
+    static calculate (a, b, operator) {
 
         switch (operator) {
             case '+':
